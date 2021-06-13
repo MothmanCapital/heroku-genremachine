@@ -9,6 +9,34 @@
                 font-family: "Rubik", "sans-serif";
             }
 
+            a:link {
+                text-decoration: none;
+                color: #909090;
+            }
+
+            a:visited {
+                text-decoration: none;
+                color: #909090;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            a:active {
+                text-decoration: underline;
+                color: #909090;
+            }
+
+            .header {
+                border-bottom: solid;
+                font-size: 22px;
+                color: #909090;
+                border-color: #000000;
+                text-align: left;
+                padding-bottom: 5px;
+            }
+
             .content {
                 display: table;
                 height: 200px;
@@ -29,20 +57,14 @@
                 vertical-align: middle;
             }
 
-            .header {
-                border-bottom: solid;
-                font-size: 22px;
-                color: #909090;
-                border-color: #000000;
-                text-align: left;
-            }
+
         </style>
     </head>
     <body>
         <div class="header">
-            <strong>genremachine</strong>
+            <strong><a href="https://github.com/SporkAscendant/heroku-genremachine">genremachine</a></strong>
         </div>
-        <div class="content">
+        <div class="content" onClick="window.location.reload();">
             <span>{{ result }}</span>
         </div>
     </body>

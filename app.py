@@ -50,7 +50,7 @@ def index():
   phrase = []
   finalPhrase = ""
   for phraseIdx in range(phraseLength):
-    phrase.append(getWord(wordList[phraseIdx], phrase, phraseIdx).rstrip())
+    phrase.append(str(getWord(wordList[phraseIdx], phrase, phraseIdx)).rstrip())
 
   for phraseIdx in range(phraseLength):
     if not(phrase[phraseIdx].endswith('-')):
