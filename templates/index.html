@@ -1,40 +1,49 @@
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+<html>
+    <head>
+        <title>genremachine</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
 
-<style>
-    * {
-        font-family: "Rubik", "sans-serif";
-    }
+        <style>
+            * {
+                font-family: "Rubik", "sans-serif";
+            }
 
-    div {
-        display: table;
-        height: 200px;
-        width: 550px;
-        background: white;
-        font-size: 40px;
-        border-style: solid;
-        text-align:center;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        margin-top: -100px;
-        margin-left: -300px;
-    }
+            .content {
+                display: table;
+                height: 200px;
+                width: 550px;
+                font-size: 40px;
+                border-style: solid;
+                text-align: center;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                margin-top: -100px;
+                margin-left: -300px;
+                padding: 10px;
+            }
 
-    span {
-        display: table-cell;
-        vertical-align: middle;
-    }
+            span {
+                display: table-cell;
+                vertical-align: middle;
+            }
 
-    h1 {
-        font-size: 40pt;
-    }
-
-    p {
-        font-size: 24pt;
-    }
-</style>
-
-<div>
-  <span>{{ result }}</span>
-</div>
+            .header {
+                border-bottom: solid;
+                font-size: 22px;
+                color: #909090;
+                border-color: #000000;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <strong>genremachine</strong>
+        </div>
+        <div class="content">
+            <span>{{ result }}</span>
+        </div>
+    </body>
+</html>

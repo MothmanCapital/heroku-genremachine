@@ -17,6 +17,8 @@ UK
 acoustic
 acoustic
 alternative
+alt-
+acapella
 ambient
 ancient
 blackened
@@ -38,6 +40,8 @@ ethereal
 experimental
 goa
 gothic
+gritty
+grimy
 hard
 hardcore
 harmonic
@@ -60,6 +64,7 @@ psychedelic
 rasta
 remixed
 somber
+sad
 straightforward
 suburban
 tantric

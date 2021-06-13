@@ -57,7 +57,7 @@ def index():
       finalPhrase += phrase[phraseIdx] + " "
     else:
       finalPhrase += phrase[phraseIdx]
-
+  print(finalPhrase)
   result = finalPhrase
 
   return render_template("index.html", result=result)
