@@ -26,11 +26,11 @@ gabber
 garage
 hop
 house
-industrial
 jams
 jazz
 jingles
 lounge
+march
 mass
 metal
 music
@@ -48,6 +48,7 @@ samba
 shanty
 ska
 sonata
+sound
 step
 style
 swing
