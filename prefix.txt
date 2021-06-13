@@ -13,6 +13,7 @@ acoustic
 alternative
 ambient
 ancient
+acoustic
 blackened
 bubblegum
 carnival
@@ -56,3 +57,5 @@ traditional
 underground
 urban
 vocal
+~ t h i c c ~
+lo-fi

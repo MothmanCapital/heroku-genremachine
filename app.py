@@ -27,8 +27,8 @@ def index():
     # d = d[:-2]
     d += ' '
     e = str(random.choice(b))
-    # e = e[:-2]
-    if not e.endswith('-'):
+    e = e[:-1]
+    if not(e.endswith('-')):
       e += ' '
     f = str(random.choice(c))
     # f = f[:-2]
