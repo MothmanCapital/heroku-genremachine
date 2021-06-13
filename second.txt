@@ -9,6 +9,11 @@ brass
 breaks
 cabaret
 chant
+canto
+cantata
+choir
+concerto
+sonata
 core
 crossover
 dance
@@ -27,9 +32,11 @@ jazz
 jingles
 lounge
 metal
+mass
 music
 noise
 opera
+parody
 pop
 punk
 ragga
@@ -42,7 +49,9 @@ ska
 step
 swing
 synth
+style
 tango
 trance
 trap
 wave
+symphony
