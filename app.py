@@ -14,13 +14,13 @@ y = open('first.txt', 'r')
 z = open('second.txt', 'r')
 
 for line in x:
-  if len(line) > 0:
+  if line.strip():
     a.append(line)
 for line in y:
-  if len(line) > 0:
+  if line.strip():
     b.append(line)
 for line in z:
-  if len(line) > 0:
+  if line.strip():
     c.append(line)
 
 wordList.append(a)
@@ -32,7 +32,7 @@ y.close()
 z.close()
 
 def getWord(wordList, arr, idx):
-  randomWord = str(random.choice(wordList))
+  randomWord = random.choice(wordList)
   if idx > 0:
     s = SequenceMatcher(None, arr[idx-1], randomWord)
     if s.ratio() < 0.8:

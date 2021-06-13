@@ -49,6 +49,7 @@ shanty
 ska
 sonata
 sound
+soul
 step
 style
 swing
