@@ -123,6 +123,7 @@ def index():
   try:
       bg_image = str("url(\"") + api.photo.random(query=bg_search_term, w=550, h=200) + str("\");")
   except:
+      print(api.photo.random(query=bg_search_term, w=550, h=200))
       bg_image = str("linear-gradient(blue, green);")
 
   return render_template("index.html", result=result, bg_image=bg_image)
