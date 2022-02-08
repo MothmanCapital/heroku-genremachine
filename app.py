@@ -2,16 +2,18 @@
 # Python Flask app that chooses words from predefined lists
 # -----
 
-import random
+import random, os
+
 from flask import Flask, render_template
+
 from difflib import SequenceMatcher
 
 from unsplash.api import Api
 from unsplash.auth import Auth
 
-client_id = ""
-client_secret = ""
-redirect_uri = ""
+client_id = os.environ['UNSPLASH_ID']
+client_secret = os.environ['UNSPLASH_KEY']
+redirect_uri = os.environ['UNSPLASH_REDIR']
 code = ""
 
 auth = Auth(client_id, client_secret, redirect_uri, code=code)
@@ -49,7 +51,7 @@ def getWordByTags(wordListFilter, *tagFilterList):
   inclusiveTagsFilterList = []
   for t in tagFilterList:
     t = str(t)
-    if t is not "None":
+    if (t != "None"):
       if t in exclusiveTags:
         exclusiveTagsFilterList.append(t)
         # print("exclusive tag: " + t)
