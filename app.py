@@ -6,6 +6,17 @@ import random
 from flask import Flask, render_template
 from difflib import SequenceMatcher
 
+from unsplash.api import Api
+from unsplash.auth import Auth
+
+client_id = ""
+client_secret = ""
+redirect_uri = ""
+code = ""
+
+auth = Auth(client_id, client_secret, redirect_uri, code=code)
+api = Api(auth)
+
 wordsCombined = []
 exclusiveTags = []
 phraseLength = 3
@@ -108,7 +119,13 @@ def index():
 
   print(finalPhrase)
   result = finalPhrase
-  return render_template("index.html", result=result)
+  bg_search_term = max(finalPhrase.split(" "), key=len)
+  try:
+      bg_image = str("url(\"") + api.photo.random(query=bg_search_term, w=550, h=200) + str("\");")
+  except:
+      bg_image = str("linear-gradient(blue, green);")
+
+  return render_template("index.html", result=result, bg_image=bg_image)
 
 if __name__ == "__main__":
     app.run()
