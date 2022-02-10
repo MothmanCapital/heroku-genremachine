@@ -145,11 +145,11 @@ def index():
     print(unsplash_html_link)
 
   if unsplash_html_link:
-    bg_image = str("url(\"") + str(unsplash_html_link) + str("\")")
+    bg_image = r'url("' + unsplash_html_link + r'")'
   else:
     bg_image = str("linear-gradient(blue, green)")
 
-  return render_template("index.html", result=result, bg_image=escape(bg_image))
+  return render_template("index.html", result=result, bg_image=bg_image)
 
 if __name__ == "__main__":
     app.run()
