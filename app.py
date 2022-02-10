@@ -2,22 +2,23 @@
 # Python Flask app that chooses words from predefined lists
 # -----
 
-import random, os
+import random, os, logging, httpimport
 
-from flask import Flask, render_template
+from flask import Flask, render_template, escape
 
 from difflib import SequenceMatcher
 
-from unsplash.api import Api
-from unsplash.auth import Auth
+with httpimport.github_repo('MothmanCapital', 'pyunsplash', branch = 'add-support-for-embed-urls'):
+    from pyunsplash import PyUnsplash
 
 client_id = os.environ['UNSPLASH_ID']
 client_secret = os.environ['UNSPLASH_KEY']
 redirect_uri = os.environ['UNSPLASH_REDIR']
-code = ""
 
-auth = Auth(client_id, client_secret, redirect_uri, code=code)
-api = Api(auth)
+# Initialize PyUnsplash app logging
+logger = logging.getLogger()
+logging.basicConfig(filename='app.log', level=logging.DEBUG)
+logging.getLogger(PyUnsplash.logger_name).setLevel(logging.DEBUG)
 
 wordsCombined = []
 exclusiveTags = []
@@ -122,13 +123,33 @@ def index():
   print(finalPhrase)
   result = finalPhrase
   bg_search_term = max(finalPhrase.split(" "), key=len)
-  try:
-      bg_image = str("url(\"") + api.photo.random(query=bg_search_term, w=550, h=200) + str("\");")
-  except:
-      print(api.photo.random(query=bg_search_term, w=550, h=200))
-      bg_image = str("linear-gradient(blue, green);")
+  print(bg_search_term)
+  # unsplash_photo = api.photo.random(query=bg_search_term, w=550, h=200)[0]
+  # py_un = PyUnsplash(api_key=client_id)
+  api = PyUnsplash(api_key=client_id)
+  unsplash_photo_coll = api.photos(type_='random', count=1, query=bg_search_term)
+  # print(unsplash_photo_coll.__dict__)
 
-  return render_template("index.html", result=result, bg_image=bg_image)
+
+  if not hasattr('unsplash_photo_coll.body', 'errors'):
+    unsplash_photo = []
+    for entry in unsplash_photo_coll.entries:
+      unsplash_photo.append(entry)
+  
+    print("body ")
+    print(unsplash_photo[0].body['urls'])
+    print()
+    print()
+
+    unsplash_html_link = unsplash_photo[0].body['urls']['raw'] + "&w=550&h=200"
+    print(unsplash_html_link)
+
+  if unsplash_html_link:
+    bg_image = str("url(\"") + str(unsplash_html_link) + str("\")")
+  else:
+    bg_image = str("linear-gradient(blue, green)")
+
+  return render_template("index.html", result=result, bg_image=escape(bg_image))
 
 if __name__ == "__main__":
     app.run()
