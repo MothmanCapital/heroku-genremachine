@@ -83,7 +83,7 @@ def getWordWithoutTags(wordListFilter, *tagFilterList):
   randomWord = random.choice(returnList)
   return randomWord
 
-def getUnsplashPhoto(search_term, w=1100, h=200):
+def getUnsplashPhoto(search_term, w=640, h=480):
   # instantiate pyunsplash connection object
   api = PyUnsplash(api_key=client_id)
 
@@ -93,7 +93,7 @@ def getUnsplashPhoto(search_term, w=1100, h=200):
 
   # retrieve raw url of photo
   try:
-    unsplash_photo = next(unsplash_photo_coll.entries).body['urls']['regular'] # + "&w=" + str(w) + "&h=" + str(h)
+    unsplash_photo = next(unsplash_photo_coll.entries).body['urls']['raw'] + "&w=" + str(w) + "&h=" + str(h)
     bg_image = r'url("' + unsplash_photo + r'")'
   except:
     bg_image = str("linear-gradient(blue, green)")
@@ -162,7 +162,7 @@ def index():
   # bg_search_term = max(finalPhrase.split(" "), key=len)
   # print(bg_search_term)
 
-  return render_template("index.html", result=finalPhrase, bg_image=bg_image)
+  return render_template("index.html", result=finalPhrase, bg_image=bg_image, search_term=search_term)
 
 if __name__ == "__main__":
     app.run()
