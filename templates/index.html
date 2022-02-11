@@ -9,6 +9,10 @@
                 font-family: "Rubik", "sans-serif";
             }
 
+            body {
+                background-color: #121212;
+            }
+
             a:link {
                 text-decoration: none;
                 color: #909090;
@@ -32,40 +36,36 @@
                 border-bottom: solid;
                 font-size: 22px;
                 color: #909090;
-                border-color: #000000;
+                border-style: solid;                
+                border-color: #ededed;
                 text-align: left;
                 padding: 5px;
             }
 
-            .content {
-                display: table;
-                height: 200px;
-                width: 550px;
-                font-size: 40px;
+            .container {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-right: -50%;
+                transform: translate(-50%, -50%);
                 border-style: solid;
-                text-align: center;
-		        color: white;
+                border-color: #000000;
+                padding-left: 50px;
+                padding-top: 50px;
+                padding-right: 50px;
+                padding-bottom: 50px;
+                background-repeat: no-repeat;
+		        background-image: {{ bg_image|safe }};
+            }
+
+            .text {
+                font-size: 40px;
+                color: #ffffff;
 		        text-shadow: -1px 1px 2px #000,
 				  1px 1px 2px #000,
 				  1px -1px 0 #000,
-				  -1px -1px 0 #000;
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                margin-top: -100px;
-                margin-left: -300px;
-                padding: 10px;
-                aspect-ratio: auto;
-                object-fit: cover;                    
-                background-repeat: no-repeat;
-		        background-image: {{ bg_image|safe }};                   
+				  -1px -1px 0 #000;                
             }
-
-            span {
-                display: table-cell;
-                vertical-align: middle;             
-            }
-
 
         </style>
     </head>
@@ -73,8 +73,8 @@
         <div class="header">
             <strong><a href="https://github.com/SporkAscendant/heroku-genremachine">genremachine</a></strong>
         </div>
-        <div class="content" onClick="window.location.reload();">
-            <span>{{ result }}</span>
+        <div class="container" onClick="window.location.reload();">
+            <div class="text">{{ result }}</div>
         </div>
     </body>
 </html>
