@@ -1,81 +1,107 @@
 <html>
-    <head>
-        <title>genremachine</title>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
 
-        <style>
-            * {
-                font-family: "Rubik", "sans-serif";
+<head>
+    <title>genremachine</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --darkmodeFont: #ffffff;
+            --darkmodeBG: #1a1a1a;
+            --lightmodeFont: #1a1a1a;
+            --lightmodeBG: #ffffff;
+        }
+
+        * {
+            font-family: "Rubik", "sans-serif";
+        }
+
+        body {
+            background: var(--darkmodeBG);
+            /* Can maybe put a darkmode/lightmode switch in top right corner and alter color variables */
+            color: var(--darkmodeFont);
+            margin: auto;
+            line-height: 1.4em;
+            overflow: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--darkmodeFont);
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: var(--darkmodeFont);
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: var(--darkmodeFont);
+        }
+
+        .header {
+            border-bottom: solid;
+            font-size: 22px;
+            color: #909090;
+            border-color: #000000;
+            text-align: left;
+            padding: 5px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            padding-top: 0;
+            margin-top: 0;
+            background: var(--darkmodeBG);
+        }
+
+        .content {
+            display: flex;
+            height: 300px;
+            width: 550px;
+            font-size: 40px;
+            border-style: solid;
+            border-radius: 10px;
+            border-color: var(--darkmodeBG);
+            box-shadow: 0 8px 32px 0 var(--darkmodeFont);
+            backdrop-filter: blur(6.0px);
+            -webkit-backdrop-filter: blur(6.0px);
+            justify-content: center;
+            align-items: center;
+            text-shadow: -1px 1px 2px #000,
+                1px 1px 2px #000,
+                1px -1px 0 #000,
+                -1px -1px 0 #000;
+            object-fit: cover;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-clip: border-box;            
+            background-image: {{ bg_image|safe }};
+        }
+
+        @media only screen and (max-width: 600px) {
+            .content {
+                width: 450px;
+                height: 200px;
             }
+        }
+    </style>
+</head>
 
-            body {
-                background-color: #121212;
-            }
+<body>
+    <div class="header">
+        <strong><a href="https://github.com/SporkAscendant/heroku-genremachine">genremachine</a></strong>
+    </div>
+    <div class="container" onClick="window.location.reload();" title="Search term: {{ search_term }}">
+        <span class="content">{{ result }}</span>
+    </div>
+</body>
 
-            a:link {
-                text-decoration: none;
-                color: #909090;
-            }
-
-            a:visited {
-                text-decoration: none;
-                color: #909090;
-            }
-
-            a:hover {
-                text-decoration: underline;
-            }
-
-            a:active {
-                text-decoration: underline;
-                color: #909090;
-            }
-
-            .header {
-                font-size: 22px;
-                color: #909090;
-                text-align: left;
-                padding: 5px;
-            }
-
-            .container {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                min-height: 480px;
-                min-width: 640px;
-                margin-right: -50%;
-                transform: translate(-50%, -50%);
-                border-style: solid;
-                border-color: #000000;
-                padding-left: 50px;
-                padding-top: 50px;
-                padding-right: 50px;
-                padding-bottom: 50px;
-                background-size: cover;
-                background-clip: border-box;
-                background-repeat: no-repeat;
-		        background-image: {{ bg_image|safe }};
-            }
-
-            .text {
-                font-size: 40px;
-                color: #ffffff;
-		        text-shadow: -3px 3px 2px #000,
-				  3px 3px 2px #000,
-				  3px -3px 0 #000,
-				  -3px -3px 0 #000;                
-            }
-
-        </style>
-    </head>
-    <body>
-        <div class="header">
-            <strong><a href="https://github.com/SporkAscendant/heroku-genremachine">genremachine</a></strong>
-        </div>
-        <div class="container" onClick="window.location.reload();" title="Search term: {{ search_term }}">
-            <div class="text">{{ result }}</div>
-        </div>
-    </body>
 </html>
