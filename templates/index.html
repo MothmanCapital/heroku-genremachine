@@ -55,12 +55,15 @@
                 margin-top: -100px;
                 margin-left: -300px;
                 padding: 10px;
-		        background-image: {{ bg_image|safe }};
+                aspect-ratio: auto;
+                object-fit: cover;                    
+                background-repeat: no-repeat;
+		        background-image: {{ bg_image|safe }};                   
             }
 
             span {
                 display: table-cell;
-                vertical-align: middle;
+                vertical-align: middle;             
             }
 
 

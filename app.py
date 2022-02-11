@@ -27,7 +27,7 @@ phraseLength = 3
 def readFiles(filename, listToReadInto):
   fileHolder = open(filename, 'r')
   for line in fileHolder:
-    if line.strip() and (line != None):
+    if line.strip() and (line != None) and (line[0] != "#"):
       listToReadInto.append(line.strip())
   return listToReadInto
   fileHolder.close()
@@ -83,6 +83,23 @@ def getWordWithoutTags(wordListFilter, *tagFilterList):
   randomWord = random.choice(returnList)
   return randomWord
 
+def getUnsplashPhoto(search_term, w=1100, h=200):
+  # instantiate pyunsplash connection object
+  api = PyUnsplash(api_key=client_id)
+
+  # Retrieve random photo matching search term from unsplash
+  print(search_term.strip("-"))
+  unsplash_photo_coll = api.photos(type_='random', count=1, query=search_term.strip("-"))
+
+  # retrieve raw url of photo
+  try:
+    unsplash_photo = next(unsplash_photo_coll.entries).body['urls']['regular'] # + "&w=" + str(w) + "&h=" + str(h)
+    bg_image = r'url("' + unsplash_photo + r'")'
+  except:
+    bg_image = str("linear-gradient(blue, green)")
+
+  return bg_image
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -90,11 +107,17 @@ def index():
   wordsList = processWordList(wordsCombined)
   phrase = []
   phraseTags = []
+  unsplash_search_eligible = []
   finalPhrase = ""
   for phraseIdx in range(phraseLength):
     pickedWord = getWordByTags(wordsList, phraseIdx)
     pickedWordTags = getTags(pickedWord, wordsList)
-    for pt in (pickedWordTags):
+    print(pickedWordTags)
+    # check to see if word can be photo searched
+    if 'p' in pickedWordTags:
+      unsplash_search_eligible.append(pickedWord)
+
+    for pt in (pickedWordTags):      
       if not pt.isdecimal():
         # not appending tags indicating position
         # which are numeric
@@ -113,6 +136,19 @@ def index():
         s = SequenceMatcher(None, phrase[phraseIdx-1], pickedWord)
       phrase.append(pickedWord)
 
+  # Pick background photo 
+  print("searchable words: ")
+  print(unsplash_search_eligible)
+
+  if len(unsplash_search_eligible) > 0:
+    search_term = random.choice(unsplash_search_eligible)
+    print("searching for " + search_term)
+    bg_image = getUnsplashPhoto(search_term)
+  else:
+    print("default search for ocean picture, none of the random terms look like they would work")
+    bg_image = getUnsplashPhoto('ocean')
+
+  print(bg_image)
   # Join dashed words together
   for phraseIdx in range(phraseLength):
     if not(phrase[phraseIdx].endswith('-')):
@@ -121,35 +157,12 @@ def index():
       finalPhrase += phrase[phraseIdx]
 
   print(finalPhrase)
-  result = finalPhrase
-  bg_search_term = max(finalPhrase.split(" "), key=len)
-  print(bg_search_term)
-  # unsplash_photo = api.photo.random(query=bg_search_term, w=550, h=200)[0]
-  # py_un = PyUnsplash(api_key=client_id)
-  api = PyUnsplash(api_key=client_id)
-  unsplash_photo_coll = api.photos(type_='random', count=1, query=bg_search_term)
-  # print(unsplash_photo_coll.__dict__)
 
+  # abandoned this method of searching for picture
+  # bg_search_term = max(finalPhrase.split(" "), key=len)
+  # print(bg_search_term)
 
-  if not hasattr('unsplash_photo_coll.body', 'errors'):
-    unsplash_photo = []
-    for entry in unsplash_photo_coll.entries:
-      unsplash_photo.append(entry)
-  
-    print("body ")
-    print(unsplash_photo[0].body['urls'])
-    print()
-    print()
-
-    unsplash_html_link = unsplash_photo[0].body['urls']['raw'] + "&w=550&h=200"
-    print(unsplash_html_link)
-
-  if unsplash_html_link:
-    bg_image = r'url("' + unsplash_html_link + r'")'
-  else:
-    bg_image = str("linear-gradient(blue, green)")
-
-  return render_template("index.html", result=result, bg_image=bg_image)
+  return render_template("index.html", result=finalPhrase, bg_image=bg_image)
 
 if __name__ == "__main__":
     app.run()
