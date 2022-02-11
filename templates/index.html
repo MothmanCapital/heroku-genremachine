@@ -7,10 +7,11 @@
 
     <style>
         :root {
-            --darkmodeFont: #ffffff;
+            --darkmodeFont: #8c8b9b;
             --darkmodeBG: #1a1a1a;
             --lightmodeFont: #1a1a1a;
-            --lightmodeBG: #ffffff;
+            --lightmodeBG: #8c8b9b;
+            --gradientBG: linear-gradient(175deg, rgba(4, 10, 6, 0.6), rgba(50, 47, 63, 0.767));
         }
 
         * {
@@ -18,8 +19,8 @@
         }
 
         body {
-            background: var(--darkmodeBG);
             /* Can maybe put a darkmode/lightmode switch in top right corner and alter color variables */
+            background: var(--darkmodeBG);
             color: var(--darkmodeFont);
             margin: auto;
             line-height: 1.4em;
@@ -59,7 +60,7 @@
             height: 100vh;
             padding-top: 0;
             margin-top: 0;
-            background: var(--darkmodeBG);
+            background: var(--gradientBG);
         }
 
         .content {
@@ -67,10 +68,11 @@
             height: 300px;
             width: 550px;
             font-size: 40px;
+            color: white;
             border-style: solid;
             border-radius: 10px;
             border-color: var(--darkmodeBG);
-            box-shadow: 0 8px 32px 0 var(--darkmodeFont);
+            box-shadow: 0 8px 64px 0 var(--darkmodeFont);
             backdrop-filter: blur(6.0px);
             -webkit-backdrop-filter: blur(6.0px);
             justify-content: center;
