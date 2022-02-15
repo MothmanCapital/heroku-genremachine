@@ -47,6 +47,7 @@ def processWordList(listToProcess):
   return wordStorage
 
 def getWordByTags(wordListFilter, *tagFilterList):
+  randomWord = ""
   matchingWordList = []
   exclusiveTagsFilterList = []
   inclusiveTagsFilterList = []
@@ -66,7 +67,8 @@ def getWordByTags(wordListFilter, *tagFilterList):
       # matchingWordList.append(l[0])
       if all(search not in l[1] for search in exclusiveTagsFilterList):
         matchingWordList.append(l[0])
-  randomWord = random.choice(matchingWordList)
+  if len(matchingWordList) > 0:
+    randomWord = random.choice(matchingWordList)
   return randomWord
 
 def getTags(wordToCheck, wordsList):
@@ -83,20 +85,25 @@ def getWordWithoutTags(wordListFilter, *tagFilterList):
   randomWord = random.choice(returnList)
   return randomWord
 
+def randColor():
+    color = "%06x" % random.randint(0, 0xFFFFFF)
+    return str(color)
+
 def getUnsplashPhoto(search_term, w=640, h=480):
   # instantiate pyunsplash connection object
   api = PyUnsplash(api_key=client_id)
 
-  # Retrieve random photo matching search term from unsplash
   print(search_term.strip("-"))
-  unsplash_photo_coll = api.photos(type_='random', count=1, query=search_term.strip("-"))
 
-  # retrieve raw url of photo
   try:
+    # Retrieve random photo matching search term from unsplash
+    unsplash_photo_coll = api.photos(type_='random', count=1, query=search_term.strip("-"))
+
+    # retrieve raw url of photo
     unsplash_photo = next(unsplash_photo_coll.entries).body['urls']['raw'] + "&w=" + str(w) + "&h=" + str(h)
     bg_image = r'url("' + unsplash_photo + r'")'
   except:
-    bg_image = str("linear-gradient(blue, green)")
+    bg_image = "linear-gradient(" + str(random.randint(0, 180)) + "deg, #" + randColor() + ", #" + randColor() + ")"
 
   return bg_image
 
@@ -104,6 +111,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+  print("-----new genre-----")
   wordsList = processWordList(wordsCombined)
   phrase = []
   phraseTags = []
@@ -112,7 +120,6 @@ def index():
   for phraseIdx in range(phraseLength):
     pickedWord = getWordByTags(wordsList, phraseIdx)
     pickedWordTags = getTags(pickedWord, wordsList)
-    print(pickedWordTags)
     # check to see if word can be photo searched
     if 'p' in pickedWordTags:
       unsplash_search_eligible.append(pickedWord)
@@ -146,6 +153,7 @@ def index():
     bg_image = getUnsplashPhoto(search_term)
   else:
     print("default search for ocean picture, none of the random terms look like they would work")
+    search_term = "ocean"
     bg_image = getUnsplashPhoto('ocean')
 
   print(bg_image)
