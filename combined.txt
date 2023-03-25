@@ -45,6 +45,7 @@ anti-;0
 arena;1,p
 art;1,p
 avant-garde;0,p
+avant-;0,1
 ballad;2,p
 baritone;0,1,p
 bass;2
@@ -83,7 +84,10 @@ clown;1,p
 college;1,p
 concerto;2,p
 contemporary;0,1
+cold;0,1,p
+cool;0,1,p
 core;2
+cosmic;0,1,p
 country;1
 crab;1,p
 crap;1
@@ -108,11 +112,15 @@ dream;1,p
 drone;1,2
 drum;1,p
 dub-;1
+dub;2
+eclectic;0,1,p
 electric;1
 electro-;0,1,p
 electro;1,p
 electronic;1,p
+electronica;2,p
 elevator;1
+emo;0,1,2,p
 epic;0
 essential;0
 ethereal;0,p
@@ -153,6 +161,7 @@ historic;0
 holiday;1,p
 hop;2
 horror;1
+hot;0,1,p
 house;2
 indie;0,1
 instrumental;0,1,p
@@ -188,6 +197,7 @@ new;0,1
 night;1
 noise;2
 nu-;0,1
+Oi!;1
 opera;2,p
 operatic;0,p
 orchestral;0,p
@@ -199,6 +209,7 @@ pirate;1,p
 polyphonic;0,p
 pop;1,2
 post-;1
+post;1
 post-apocalyptic;0,p
 power;1
 primal;0,p
@@ -237,7 +248,9 @@ step;2
 straightforward;0
 style;2
 suburban;0,1,p
+surf;1,p
 swing;1,2,p
+swamp;1,p
 symphonic;0,1,p
 symphony;2,p
 synth;1,2,p
@@ -250,6 +263,7 @@ thrash;1,p
 traditional;0,1
 trance;2,p
 trap;2
+trip;1
 tunes;2
 turbo;1
 two step;2
