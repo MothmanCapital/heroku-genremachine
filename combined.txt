@@ -1,5 +1,5 @@
 # Tags:
-# 'a' - place names, only one of these will be selected (self-exclusive)
+# 'a' - location-based tags, only one of these will be selected (self-exclusive)
 # 'p' - eligible for photo search
 8-bit;0,1,p
 Baroque;0,p
@@ -9,7 +9,7 @@ Cajun;0,a,p
 Caribbean;0,1,a,p
 Celtic;0,1,a,p
 Christian;0,1,p
-Detroit;0,1,p
+Detroit;0,1,a,p
 East Coast;0,1,a,p
 Euro-;1,a,p
 Gospel;2,p
@@ -28,7 +28,7 @@ Scandinavian;0,a,p
 Slavic;0,a,p
 Sousaphone;1,p
 Swedish;0,1,a,p
-Tejano;1,p
+Tejano;1,a,p
 Tokyo;0,1,a,p
 UK;0,a,p
 acapella;0
@@ -91,18 +91,18 @@ cosmic;0,1,p
 country;1
 crab;1,p
 crap;1
-crash;1
+crash;1,p
 crossover;2
 crunk;0,1
 crust;1
-cuddle;1
+cuddle;1,p
 cyber;1,p
-dance;2
+dance;2,p
 dancehall;1,p
 dark;0,1,p
-death;1
+death;1,p
 deep;0,1
-dirty;0
+dirty;0,p
 disco;0,1,2,p
 djent;1,p
 doom;1,p
@@ -114,12 +114,12 @@ drum;1,p
 dub-;1
 dub;2
 eclectic;0,1,p
-electric;1
+electric;1,p
 electro-;0,1,p
 electro;1,p
 electronic;1,p
 electronica;2,p
-elevator;1
+elevator;1,p
 emo;0,1,2,p
 epic;0
 essential;0
@@ -128,7 +128,7 @@ experimental;0,1
 factory;1,p
 flamenco;2,p
 folk;1,2
-freak;1
+freak;1,p
 free;1
 freeform;1
 freestyle;0,1,p
@@ -160,12 +160,12 @@ heavy;0
 historic;0
 holiday;1,p
 hop;2
-horror;1
+horror;1,p
 hot;0,1,p
 house;2
-indie;0,1
+indie;0,1,p
 instrumental;0,1,p
-intense;0
+intense;0,p
 jack;1
 jam;1
 jams;2,p
@@ -175,7 +175,7 @@ jungle;1,p
 kawaii;1,p
 liquid;1
 liturgy;2,p
-live;0
+live;0,p
 lo-fi;0,p
 lounge;2,p
 march;2
@@ -187,14 +187,14 @@ melodic;0,1,p
 metal;1,2
 minimal;0,1,p
 modern;0,p
-music;2
+music;2,p
 neo-;0,1
 neo;1
 neoclassical;1,p
 nerd;1,p
 neuro;1
 new;0,1
-night;1
+night;1,p
 noise;2
 nu-;0,1
 Oi!;1
@@ -211,9 +211,9 @@ pop;1,2
 post-;1
 post;1
 post-apocalyptic;0,p
-power;1
+power;1,p
 primal;0,p
-prog;1
+prog;1,p
 progressive;0,1
 psy-;1,p
 psychedelic;0,1,p
@@ -225,7 +225,7 @@ rasta;0,p
 rave;1,p
 reggae;2,p
 reggaeton;2,p
-remixed;0
+remixed;0,p
 river;1,p
 rock;1,2,p
 rocksteady;1,p
@@ -237,7 +237,7 @@ shoegaze;1,p
 ska;1,2,p
 sludge;1,p
 smooth;0
-soft;1
+soft;1,p
 somber;0,p
 sonata;2,p
 soul;1,2
@@ -264,10 +264,10 @@ traditional;0,1
 trance;2,p
 trap;2
 trip;1
-tunes;2
+tunes;2,p
 turbo;1
 two step;2
-underground;0,1
+underground;0,1p
 upbeat;0
 urban;0,1
 viking;1,p
