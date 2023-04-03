@@ -5,7 +5,7 @@
 Baroque;0,p
 Big Band;1,p
 Bolero;1,p
-Cajun;0,a,p
+Cajun;0,1,a,p
 Caribbean;0,1,a,p
 Celtic;0,1,a,p
 Christian;0,1,p
@@ -22,15 +22,16 @@ K-pop;2,a,p
 Latin;1,a,p
 Long Beach;0,1,a,p
 Mariachi;1,p
-Moombahton;0,p
+Memphis;0,1,p
+Moombahton;0,1,p
 Saxophone;1,p
-Scandinavian;0,a,p
-Slavic;0,a,p
+Scandinavian;0,1,a,p
+Slavic;0,1,a,p
 Sousaphone;1,p
 Swedish;0,1,a,p
 Tejano;1,a,p
 Tokyo;0,1,a,p
-UK;0,a,p
+UK;0,1,a,p
 acapella;0
 acid;1
 acoustic;0,1
