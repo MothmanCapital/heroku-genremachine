@@ -1,3 +1,10 @@
+genremachine.json
+firebase.json
+firestore.indexes.json
+firestore.rules
+pyvenv.cfg
+temp/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
