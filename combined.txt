@@ -189,6 +189,7 @@ metal;1,2
 minimal;0,1,p
 modern;0,p
 music;2,p
+mumble;1,p
 neo-;0,1
 neo;1
 neoclassical;1,p
