@@ -4,12 +4,23 @@
 
 import random, os, logging, httpimport
 
-from flask import Flask, render_template, escape
+# imports for firestore
+import firebase_admin
+from firebase_admin import credentials
+from google.cloud import firestore
+from firebase_admin import firestore
 
+from flask import Flask, render_template, request, flash, redirect, url_for
 from difflib import SequenceMatcher
+
+from UrlShare import UrlShare
 
 with httpimport.github_repo('MothmanCapital', 'pyunsplash', branch = 'add-support-for-embed-urls'):
     from pyunsplash import PyUnsplash
+
+# initialize firestore connection
+cred = credentials.Certificate("genremachine.json")
+firebase_admin.initialize_app(cred)
 
 client_id = os.environ['UNSPLASH_ID']
 client_secret = os.environ['UNSPLASH_KEY']
@@ -172,5 +183,27 @@ def index():
 
   return render_template("index.html", result=finalPhrase, bg_image=bg_image, search_term=search_term)
 
+def save_url(phrase=None, img=None, search=None):
+  new_shared_url = UrlShare(phrase, img, search)
+  new_shared_url.commit()
+
+@app.route("/share", defaults={'share_uuid': None})
+@app.route("/share/<share_uuid>") # , methods=['GET', 'POST'])
+def share(share_uuid):
+  # Initialize Firebase connection
+  db = firestore.Client(project='genremachine-2e8a4')
+  shared_genre = db.collection(u'shared_urls').document(share_uuid)
+
+  if share_uuid == None:
+    save_url(phrase=None, img=None, search=None)
+  sg = shared_genre.get()
+  if sg.exists:
+      print(sg.to_dict())
+      return sg.to_dict()
+  else:
+      print(u'No such document!')
+      return "No such document!"
+
 if __name__ == "__main__":
     app.run()
+    gunicorn_logger = logging.getLogger('gunicorn.error')
