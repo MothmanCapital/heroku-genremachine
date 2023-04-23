@@ -94,14 +94,7 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-clip: border-box;
-
-      background-image: {
-          {
-          bg_image|safe
-        }
-      }
-
-      ;
+      background-image: {{ bg_image|safe }};
     }
 
     @media only screen and (max-width: 600px) {
@@ -118,11 +111,11 @@
     <strong><a href="https://github.com/SporkAscendant/heroku-genremachine">genremachine</a></strong>
     <strong><a href="/share">share</a></strong>
   </div>
-  <div class="container" onClick="window.location.reload();" title="Search term: {{ search_term }}">
+  <div class="container" onClick="window.location.href='/';" title="Search term: {{ search_term }}">
     <div class="explainer">
       Looking for a new genre of music to explore? Why not check out...
     </div>
-    <span class="content">{{ result }}</span>
+    <span class="content">{{ phrase_result }}</span>
   </div>
 </body>
 
