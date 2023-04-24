@@ -151,76 +151,81 @@ app = Flask(__name__)
 @app.route("/", defaults={"share_uuid": None})
 @app.route("/<share_uuid>")
 def index(share_uuid):
-    print("-----new genre-----")
-    wordsList = processWordList(wordsCombined)
-    phrase = []
-    phraseTags = []
-    unsplash_search_eligible = []
-    phrase_result = ""
-    for phraseIdx in range(phraseLength):
-        pickedWord = getWordByTags(wordsList, phraseIdx)
-        pickedWordTags = getTags(pickedWord, wordsList)
-        # check to see if word can be photo searched
-        if "p" in pickedWordTags:
-            unsplash_search_eligible.append(pickedWord)
-
-        for pt in pickedWordTags:
-            if not pt.isdecimal():
-                # not appending tags indicating position
-                # which are numeric
-                phraseTags.append(pt)
-        if phraseIdx == 0:
-            # If index is zero we are getting adjective 1 and not using sequence matcher
-            phrase.append(pickedWord)
-        else:
-            # if we aren't on the first word in the phrase...
-            # compare current word with previous word in phrase
-            s = SequenceMatcher(None, phrase[phraseIdx - 1], pickedWord)
-            while s.ratio() > 0.8:
-                print("Word too similar:")
-                print(pickedWord)
-                pickedWord = getWordByTags(wordsList, str(phraseIdx), phraseTags)
-                s = SequenceMatcher(None, phrase[phraseIdx - 1], pickedWord)
-            phrase.append(pickedWord)
-
-    # Pick background photo
-    print("searchable words: ")
-    print(unsplash_search_eligible)
-
-    if len(unsplash_search_eligible) > 0:
-        search_term = random.choice(unsplash_search_eligible)
-        print("searching for " + search_term)
-        bg_image = getUnsplashPhoto(search_term)
-    else:
-        print(
-            "default search for ocean picture, none of the random terms look like they would work"
-        )
-        search_term = "ocean"
-        bg_image = getUnsplashPhoto("ocean")
-
-    print(bg_image)
-    # Join dashed words together
-    for phraseIdx in range(phraseLength):
-        if not (phrase[phraseIdx].endswith("-")):
-            phrase_result += phrase[phraseIdx] + " "
-        else:
-            phrase_result += phrase[phraseIdx]
-
-    print(phrase_result)
-
-    new_shared_url = UrlShare(phrase_result, bg_image, search_term)
-    share_redir = "/" + new_shared_url.uuid
-
     if share_uuid == None:
+        print("-----new genre-----")
+        wordsList = processWordList(wordsCombined)
+        phrase = []
+        phraseTags = []
+        unsplash_search_eligible = []
+        phrase_result = ""
+        for phraseIdx in range(phraseLength):
+            pickedWord = getWordByTags(wordsList, phraseIdx)
+            pickedWordTags = getTags(pickedWord, wordsList)
+            # check to see if word can be photo searched
+            if "p" in pickedWordTags:
+                unsplash_search_eligible.append(pickedWord)
+
+            for pt in pickedWordTags:
+                if not pt.isdecimal():
+                    # not appending tags indicating position
+                    # which are numeric
+                    phraseTags.append(pt)
+            if phraseIdx == 0:
+                # If index is zero we are getting adjective 1 and not using sequence matcher
+                phrase.append(pickedWord)
+            else:
+                # if we aren't on the first word in the phrase...
+                # compare current word with previous word in phrase
+                s = SequenceMatcher(None, phrase[phraseIdx - 1], pickedWord)
+                while s.ratio() > 0.8:
+                    print("Word too similar:")
+                    print(pickedWord)
+                    pickedWord = getWordByTags(wordsList, str(phraseIdx), phraseTags)
+                    s = SequenceMatcher(None, phrase[phraseIdx - 1], pickedWord)
+                phrase.append(pickedWord)
+
+        # Pick background photo
+        print("searchable words: ")
+        print(unsplash_search_eligible)
+
+        if len(unsplash_search_eligible) > 0:
+            search_term = random.choice(unsplash_search_eligible)
+            print("searching for " + search_term)
+            bg_image = getUnsplashPhoto(search_term)
+        else:
+            print(
+                "default search for ocean picture, none of the random terms look like they would work"
+            )
+            search_term = "ocean"
+            bg_image = getUnsplashPhoto("ocean")
+
+        print(bg_image)
+        # Join dashed words together
+        for phraseIdx in range(phraseLength):
+            if not (phrase[phraseIdx].endswith("-")):
+                phrase_result += phrase[phraseIdx] + " "
+            else:
+                phrase_result += phrase[phraseIdx]
+
+        print(phrase_result)
+
+        new_shared_url = UrlShare(phrase_result, bg_image, search_term)
+        share_redir = "/" + new_shared_url.uuid
         new_shared_url.commit()
         return redirect(share_redir)
     else:
-        # return str(new_shared_url.phrase)
+        shared_url = UrlShare(uuid=share_uuid)
+        print(shared_url)
+        db = firestore.Client(project="genremachine-2e8a4")
+        collection = db.collection("shared_urls")
+        doc = collection.document(share_uuid).get().to_dict()
+        print(doc)
         return render_template(
             "index.html",
-            phrase_result=new_shared_url.phrase,
-            bg_image=new_shared_url.img_url,
-            search_term=new_shared_url.search_term,
+            phrase_result=doc['phrase'],
+            bg_image=doc['img'],
+            search_term=doc['search'],
+            clicks=doc['clicks']
         )
 
 
