@@ -12,7 +12,6 @@ from firebase_admin import firestore
 
 from flask import Flask, render_template, request, flash, redirect, url_for
 from difflib import SequenceMatcher
-from linkpreview import link_preview
 
 from UrlShare import UrlShare
 
