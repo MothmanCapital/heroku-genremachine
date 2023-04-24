@@ -219,7 +219,7 @@ def index(share_uuid):
         db = firestore.Client(project="genremachine-2e8a4")
         collection = db.collection("shared_urls")
         doc = collection.document(share_uuid).get().to_dict()
-        print(doc)
+
         return render_template(
             "index.html",
             phrase_result=doc['phrase'],
