@@ -12,6 +12,7 @@ from firebase_admin import firestore
 
 from flask import Flask, render_template, request, flash, redirect, url_for
 from difflib import SequenceMatcher
+from linkpreview import link_preview
 
 from UrlShare import UrlShare
 
@@ -224,6 +225,7 @@ def index(share_uuid):
             "index.html",
             phrase_result=doc['phrase'],
             bg_image=doc['img'],
+            link_preview_img=str(doc['img'])[5:-2],
             search_term=doc['search'],
             clicks=doc['clicks']
         )
